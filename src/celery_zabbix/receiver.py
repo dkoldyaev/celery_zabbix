@@ -6,7 +6,7 @@ import celery.bin.base
 import collections
 import json
 import logging
-import thread
+import _thread as thread
 import threading
 import time
 import zbxsend
