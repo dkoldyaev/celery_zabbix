@@ -1,4 +1,4 @@
-from ConfigParser import ConfigParser
+from configparser import ConfigParser
 from cStringIO import StringIO
 from functools import wraps
 from greplin import scales
