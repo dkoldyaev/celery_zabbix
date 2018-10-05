@@ -47,28 +47,28 @@ class Receiver(object):
         # XXX We'd like to maybe differentiate this by queue, but
         # task.routing_key is always None, even though in redis it contains the
         # queue name.
-        log.debug('Started %s', task)
+        log.debug('Started %s' % task)
         stats.started += 1
         if task.sent:
             stats.queuetime = time.time() - task.sent
 
     @task_handler
     def on_task_succeeded(self, event, task):
-        log.debug('Succeeded %s', task)
+        log.debug('Succeeded %s' % task)
         stats.succeeded += 1
         if task is not None and task.runtime is not None:
             stats.runtime = task.runtime
 
     @task_handler
     def on_task_failed(self, event, task):
-        log.debug('Failed %s', task)
+        log.debug('Failed %s' % task)
         stats.failed += 1
         if task is not None and task.runtime is not None:
             stats.runtime = task.runtime
 
     @task_handler
     def on_task_retried(self, event, task):
-        log.debug('Retried %s', task)
+        log.debug('Retried %s' % task)
         stats.retried += 1
         if task is not None and task.runtime is not None:
             stats.runtime = task.runtime
@@ -116,9 +116,7 @@ class Command(Command):
                 metrics['celery.discover.queues'] = json.dumps(
                     {'data': discovery})
                 self._send_to_zabbix(metrics)
-                log.debug(
-                    'Dump thread going to sleep for %s seconds',
-                    self.dump_interval)
+                log.debug('Dump thread going to sleep for %s seconds' % self.dump_interval)
                 time.sleep(self.dump_interval)
             except Exception:
                 log.error(
@@ -191,9 +189,9 @@ class Command(Command):
                 break
             except Exception as e:
                 log.error(
-                    'Failed to capture events: "%s", '
-                    'trying again in %s seconds.',
-                    e, try_interval, exc_info=True)
+                    'Failed to capture events: "%s", trying again in %s seconds.' % (e, try_interval),
+                    exc_info=True
+                )
                 time.sleep(try_interval)
 
     def prepare_args(self, *args, **kw):
