@@ -2,7 +2,7 @@ from configparser import ConfigParser
 from io import StringIO
 from functools import wraps
 from greplin import scales
-import celery.bin.base
+from celery.bin.base import Command
 import collections
 import json
 import logging
@@ -88,7 +88,7 @@ class Receiver(object):
             recv.capture(*args, **kw)
 
 
-class Command(celery.bin.base.Command):
+class Command(Command):
 
     should_stop = False
 
