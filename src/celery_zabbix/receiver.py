@@ -1,5 +1,5 @@
 from configparser import ConfigParser
-from cStringIO import StringIO
+from io import StringIO
 from functools import wraps
 from greplin import scales
 import celery.bin.base
